@@ -6,7 +6,7 @@ import '../database/app_database.dart';
 class ProfileScreen extends StatefulWidget {
   final User user;
 
-  const ProfileScreen({Key? key, required this.user}) : super(key: key);
+  const ProfileScreen({super.key, required this.user});
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -56,8 +56,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   MaterialPageRoute(builder: (_) => LoginPage()),
                 );
               },
-              child: Text("Logout"),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              child: Text("Logout"),
             ),
           ],
         ),

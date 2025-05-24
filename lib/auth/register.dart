@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../database/app_database.dart';  // Panggil AppDatabase langsung
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
@@ -49,7 +51,6 @@ class _RegisterPageState extends State<RegisterPage> {
         return;
       }
 
-      // Insert user baru dengan saldo 500000 (sesuai permintaan)
       final insertedId = await appDatabase.registerUser(email, password);
       print('User baru dibuat dengan id: $insertedId');
 

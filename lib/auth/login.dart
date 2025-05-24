@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../database/user_dao.dart';
-import '../models/model_user.dart';
 import '../Pages/menu_utama.dart';
-import '../auth/register.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

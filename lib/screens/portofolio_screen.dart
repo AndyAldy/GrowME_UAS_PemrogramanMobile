@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import '../database/app_database.dart';
 
-class PortfolioScreen extends StatefulWidget {
+class PortofolioScreen extends StatefulWidget {
   final int userId;
 
-  const PortfolioScreen({Key? key, required this.userId}) : super(key: key);
+  const PortofolioScreen({super.key, required this.userId});
 
   @override
-  _PortfolioScreenState createState() => _PortfolioScreenState();
+  _PortofolioScreenState createState() => _PortofolioScreenState();
 }
 
-class _PortfolioScreenState extends State<PortfolioScreen> {
+class _PortofolioScreenState extends State<PortofolioScreen> {
   double totalInvested = 0;
   double estimatedProfit = 0;
 

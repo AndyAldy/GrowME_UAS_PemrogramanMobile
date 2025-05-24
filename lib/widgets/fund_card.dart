@@ -7,7 +7,7 @@ class FundCard extends StatelessWidget {
   final int userId;
   final Fund fund;
 
-  FundCard({
+  const FundCard({super.key, 
     required this.userId,
     required this.fund,
   });

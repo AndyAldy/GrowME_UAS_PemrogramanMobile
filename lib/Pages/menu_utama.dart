@@ -7,7 +7,7 @@ import '../screens/profile_screen.dart';
 class MainPage extends StatefulWidget {
   final User user;
 
-  const MainPage({Key? key, required this.user}) : super(key: key);
+  const MainPage({super.key, required this.user});
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -33,7 +33,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     final screens = [
       HomeScreen(user: user),
-      PortfolioScreen(userId: user.id ?? 0),
+      PortofolioScreen(userId: user.id ?? 0),
       ProfileScreen(user: user),
     ];
 
