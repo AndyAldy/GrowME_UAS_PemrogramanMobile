@@ -1,49 +1,38 @@
-import 'package:growme/database/app_database.dart';
+import 'package:hive/hive.dart';
 import 'package:growme/models/model_user.dart';
 
 class UserDao {
-  final dbProvider = AppDatabase.instance;
+  final Box<User> userBox = Hive.box<User>('users');
 
-Future<User?> loginUser(String email, String password) async {
-  final db = await dbProvider.database;
-  if (db == null) {
-    print('DB belum tersedia saat login.');
-    return null;
+  // Login user berdasarkan email dan password
+  Future<User?> loginUser(String email, String password) async {
+    try {
+      return userBox.values.firstWhere(
+        (user) => user.email == email && user.password == password,
+        orElse: () => throw Exception('User tidak ditemukan'),
+      );
+    } catch (e) {
+      print('Error saat login: $e');
+      return null;
+    }
   }
 
-  final maps = await db.query(
-    'users',
-    where: 'email = ? AND password = ?',
-    whereArgs: [email, password],
-    limit: 1,
-  );
-
-  print('Login result: $maps');
-
-  if (maps.isNotEmpty) {
-    return User.fromMap(maps.first);
-  }
-  return null;
-}
-
-
-  Future<int> insertUser(User user) async {
-    final db = await dbProvider.database;
-    return await db!.insert('users', user.toMap());
+  // Insert user baru
+  Future<void> insertUser(User user) async {
+    await userBox.put(user.id, user);
   }
 
-  Future<int> updateUserSaldo(int userId, double newSaldo) async {
-    final db = await dbProvider.database;
-    return await db!.update(
-      'users',
-      {'saldo': newSaldo},
-      where: 'id = ?',
-      whereArgs: [userId],
-    );
+  // Update saldo user
+  Future<void> updateUserSaldo(int userId, double newSaldo) async {
+    final user = userBox.get(userId);
+    if (user != null) {
+      user.saldo = newSaldo;
+      await user.save(); // simpan perubahan
+    }
   }
 
-  Future<int> deleteUser(int userId) async {
-    final db = await dbProvider.database;
-    return await db!.delete('users', where: 'id = ?', whereArgs: [userId]);
+  // Hapus user
+  Future<void> deleteUser(int userId) async {
+    await userBox.delete(userId);
   }
 }
