@@ -80,7 +80,7 @@ class AppDatabase {
     return await db!.insert('users', {
       'email': email,
       'password': password,
-      'saldo': 10000.0,
+      'saldo': 0.0,
     });
   }
 

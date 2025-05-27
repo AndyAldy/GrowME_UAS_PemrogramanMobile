@@ -1,20 +1,8 @@
-import 'package:hive/hive.dart';
-
-part 'model_user.g.dart'; // Jangan lupa generate ini nanti
-
-@HiveType(typeId: 1)
-class User extends HiveObject {
-  @HiveField(0)
-  int id;
-
-  @HiveField(1)
-  String email;
-
-  @HiveField(2)
-  String password;
-
-  @HiveField(3)
-  double saldo;
+class User {
+  final int id;
+  final String email;
+  final String password;
+  final double saldo;
 
   User({
     required this.id,

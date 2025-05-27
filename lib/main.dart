@@ -3,15 +3,8 @@ import 'package:growme/auth/login.dart';
 import 'package:growme/auth/register.dart';
 import 'Pages/menu_utama.dart';
 import 'models/model_user.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await Hive.initFlutter();
-  Hive.registerAdapter(UserAdapter());
-  await Hive.openBox<User>('users');
-
+void main() {
   runApp(const GrowMeApp());
 }
 
@@ -29,6 +22,7 @@ class GrowMeApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (context) => RegisterPage(),
       },
+      // Gunakan onGenerateRoute agar bisa oper data (User) secara dinamis
       onGenerateRoute: (settings) {
         if (settings.name == '/MainPage') {
           final user = settings.arguments as User;
